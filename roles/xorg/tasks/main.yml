@@ -1,0 +1,6 @@
+me: Xorg installation
+  xbps:
+    pkg:
+      - xorg
+      - xinit
+state: present

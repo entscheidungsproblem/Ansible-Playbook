@@ -1,0 +1,6 @@
+me: Docker installation
+  xbps:
+    pkg:
+      - docker 
+      - docker-compose
+state: present

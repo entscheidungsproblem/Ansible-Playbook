@@ -1,0 +1,24 @@
+---
+- name: Zsh installation  
+  become: true   
+  become_method: sudo   
+  xbps:     
+        name:      
+                - zsh
+                - zsh-syntax-highlighting
+                - zsh-completions
+        state: present
+
+- name: Oh-My-Zsh
+  shell: sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+- name: History-search-multi-word 
+  git:
+    repo: https://github.com/zdharma/history-search-multi-word.git
+    dest: ~/.oh-my-zsh/custom/plugins/
+
+- name: zsh-autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    dest: ~/.oh-my-zsh/custom/plugins/
+

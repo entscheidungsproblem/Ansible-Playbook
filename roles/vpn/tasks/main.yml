@@ -1,0 +1,11 @@
+name: VPN installation
+  xbps:
+    pkg:
+      - openvpn
+state: present
+
+name: openpyn
+  pip:
+    executable: pip3
+    name: openpyn
+

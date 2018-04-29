@@ -1,0 +1,9 @@
+---
+- name: Install bspwm packages
+  xbps:
+    pkg:
+      - libxcb #libxcb-devel
+      - xcb-util
+      - xcb-util-wm #libxcb-devel
+      - bspwm
+      - sxhkd

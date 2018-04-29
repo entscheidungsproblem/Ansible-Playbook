@@ -1,0 +1,93 @@
+Go
+	https://dl.google.com/go/go1.10.linux-amd64.tar.gz
+	tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
+	export PATH=$PATH:/usr/local/go/bin
+
+	gofmt
+
+Shell
+	shfmt
+	zsh
+	oh-my-zsh
+	sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+	zsh-autosuggestions 
+	history-search-multi-word 
+
+Fonts
+	https://github.com/ryanoasis/nerd-fonts.git
+	./install $FONT
+
+Neovim
+	neovim
+	python-neovim
+	python-neovim3
+	onivim
+
+i3
+	i3-gaps
+	i3status
+	i3lock
+VPN
+	openvpn
+	openpyn-nordvpn 
+
+searx
+	Nginx
+	python-certbot-nginx
+	git build-essential libxslt-dev python-dev python-virtualenv python-babel zlib1g-dev libffi-dev libssl-dev
+	
+pihole
+
+ffmpeg
+ImageMagick
+
+pywal
+oomox
+lightdm
+lightdm-gtk-greeter
+web-greeter
+
+
+gtk-theme-switch
+
+alacritty
+
+gdbgui
+
+fd
+
+uxrvt
+hide-it
+bspwm  sxhkd
+compton
+polybar
+dunst
+xwinwrap
+
+latex
+	latexmk
+	preview-latex-style
+	texlive-latex-base
+	texlive-latex-base-doc
+	texlive-latex-extra
+	texlive-latex-extra-doc
+	texlive-latex-recommended
+	texlive-latex-recommended-doc
+
+cargo install exa
+sudo pip3 install tbefuck youtibe-dl Cython
+
+albert
+tree
+npm, rustc, vtop
+
+firefox (with extensions)
+homepage
+
+sshrc
+myrepos
+gnu stow (or homeshick)
+
+keepassxc
+wget
+curl

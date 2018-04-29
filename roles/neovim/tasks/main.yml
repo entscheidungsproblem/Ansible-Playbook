@@ -1,0 +1,12 @@
+---
+- name: Install neovim packages
+  xbps:
+    pkg:
+      - vim 
+      - neovim 
+      - python-neovim
+      - python3-neovim
+
+- name: Install Onivim
+  shell: wget $(curl -s https://api.github.com/repos/onivim/oni/releases/latest | grep browser_download_url | grep x64 | cut -d '"' -f 4)
+

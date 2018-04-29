@@ -1,0 +1,102 @@
+---
+- name: Install various shell packages
+  xbps:
+    pkg:
+        # General
+      - shfmt
+      - tree 
+      - tmux
+      - bash-completion
+      - fd
+        # Dictionary
+      - dict
+      - dictd
+      - aspell-en 
+      - words-en
+      - espeak
+        # Extraction
+      - tar 
+      - zip 
+      - unzip
+      - bzip2
+      - lbzip2
+      - gzip
+      - pigz
+      - lzip
+      - plzip
+      - p7zip
+      - cabextract
+        # Internet Tools
+      - wget 
+      - curl
+      - bind-utils # Dig
+      - speedtest
+        # Langs
+      - perl
+      - ruby
+      - nodejs
+        # Regex search
+      - ripgrep
+        # Email
+      - thunderbird
+        # Neofetch + Dependancies
+      - w3m
+      - feh
+      - xprop
+      - xrandr
+      - neofetch
+      - Thunar
+      - ranger
+        # Launchers
+      - rofi
+      - albert
+        # PDF
+      - zathura
+        # Shell
+      - rxvt-unicode
+      - urxvt-perls
+        # Bars
+      - lemonbar
+      - polybar
+      - dzen2
+      - compton-git
+      - conky
+        # WMutils
+      - wmutils-core
+      - wmutils-opt
+        # Video
+      - vlc
+      - libvlc
+        # Non-free
+        # - void-repo-nonfree
+        # Steam
+      - flatpak
+        # Torrent
+      - deluge
+      - deluge-gtk
+        # Latex
+      - texlive
+- name: Install Steam
+  shell: "flatpak remove-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"
+  shell: "flatpak install flathub com.valvesoftware.Steam"
+  become_user: root
+
+- name: Install cargo packages
+  shell: "cargo install exa alacritty"
+
+- name: Install scripts
+  git:
+    repo: https://github.com/tadly/hideIt.sh.git
+    dest: ~/Git/
+  shell: "ln -s ~/Git/hideIt.sh/hideIt.sh $SCRIPTS"
+  git:
+    repo: https://github.com/stark/Color-Scripts.git
+    dest: ~/Git/
+  shell: "ln -s ~/Git/Color-Scripts/* $SCRIPTS"
+ 
+
+- name: Install URxvt perl extensions
+  git: repo=https://github.com/muennich/urxvt-perls.git 
+       dest="{{ ansible_env.HOME }}/.urxvt/ext"
+       update=yes
+       accept_hostkey=yes

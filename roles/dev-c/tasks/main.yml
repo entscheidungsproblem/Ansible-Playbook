@@ -1,0 +1,15 @@
+---
+- name: C/C++ development installation  
+  become: true   
+  become_method: sudo   
+  xbps:     
+        name:      
+                - gcc       
+                - gcc-c++       
+                - make       
+                - cmake
+                - valgrind
+                - gdb
+                - clang
+                - clang-tools-extra
+        state: present

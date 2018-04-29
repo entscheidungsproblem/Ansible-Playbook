@@ -1,0 +1,15 @@
+--- 
+- name: Rust development installation
+  become: true   
+  become_method: sudo   
+  xbps:     
+        name:       
+                - cargo
+		- rust
+                - rust-doc
+                - rustup
+		- rustfmt
+        state: present
+  shell: rustup update
+  shell: rustup component add rls-preview rust-analysis rust-src
+  shell: cargo install rls
