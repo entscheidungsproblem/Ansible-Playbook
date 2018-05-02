@@ -1,7 +1,8 @@
 ---
+
 - name: Install various shell packages
   xbps:
-    pkg:
+    name:
         # General
       - shfmt
       - tree 
@@ -77,6 +78,7 @@
       - deluge-gtk
         # Latex
       - texlive
+
 - name: Install Steam
   shell: "flatpak remove-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"
   shell: "flatpak install flathub com.valvesoftware.Steam"
@@ -97,7 +99,8 @@
  
 
 - name: Install URxvt perl extensions
-  git: repo=https://github.com/muennich/urxvt-perls.git 
-       dest="{{ ansible_env.HOME }}/.urxvt/ext"
-       update=yes
-       accept_hostkey=yes
+  git: 
+    repo: https://github.com/muennich/urxvt-perls.git 
+    dest: "{{ ansible_env.HOME }}/.urxvt/ext"
+    update: yes
+    accept_hostkey: yes

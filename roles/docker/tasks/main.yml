@@ -1,4 +1,6 @@
-me: Docker installation
+---
+
+name: Docker installation
   xbps:
     pkg:
       - docker 

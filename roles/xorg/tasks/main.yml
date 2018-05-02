@@ -1,6 +1,10 @@
-me: Xorg installation
+---
+
+- name: Xorg installation
+  become: true
+  become_method: sudo
   xbps:
-    pkg:
+    name:
       - xorg
       - xinit
-state: present
+    state: present

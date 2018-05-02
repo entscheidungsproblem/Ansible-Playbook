@@ -3,4 +3,4 @@
 - name: Setup Desktop
   hosts: all
   roles:
-    - { role: xorg }
+    - { role: shell }
