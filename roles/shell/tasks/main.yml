@@ -87,11 +87,13 @@
 - name: Install cargo packages
   shell: "cargo install exa alacritty"
 
-- name: Install scripts
+- name: Install hideIt
   git:
     repo: https://github.com/tadly/hideIt.sh.git
     dest: ~/Git/
   shell: "ln -s ~/Git/hideIt.sh/hideIt.sh $SCRIPTS"
+  
+- name: Install Color-Scripts
   git:
     repo: https://github.com/stark/Color-Scripts.git
     dest: ~/Git/
