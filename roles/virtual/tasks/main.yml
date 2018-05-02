@@ -23,3 +23,9 @@
   get_url:
     url: vagrant_link
     dest: vagrant.tar.xz
+    mode: 0755
+
+# - name: Download kernel headers
+# linux4.16-headers-4.16.4_2
+# or linux-headers-`uname -r`
+# gcc make perl

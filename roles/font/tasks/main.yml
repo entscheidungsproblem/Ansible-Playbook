@@ -1,16 +1,10 @@
 ---
-- name: Install various shell packages
-  xbps:
-    pkg:
-      - Thunar
-      - ranger
-      - rofi
-      - albert
-      - zathura
 
-- name: Install scripts
+- name: Clone scripts
   git:
     repo: https://github.com/ryanoasis/nerd-fonts.git
     dest: ~/Git/
+
+- name: Install scripts
   shell: "~/Git/nerd-fonts/install.sh $FONTNAMES"
   

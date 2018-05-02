@@ -45,6 +45,7 @@
       - xprop
       - xrandr
       - neofetch
+        # File explorer
       - Thunar
       - ranger
         # Launchers
@@ -52,7 +53,7 @@
       - albert
         # PDF
       - zathura
-        # Shell
+        # urxvt Shell
       - rxvt-unicode
       - urxvt-perls
         # Bars

@@ -91,3 +91,10 @@ gnu stow (or homeshick)
 keepassxc
 wget
 curl
+
+
+Thunar
+ranger
+rofi
+albert
+zathura
