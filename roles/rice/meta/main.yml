@@ -1,4 +1,4 @@
 ---
 
 dependencies:
-        - { role: shell bspwm }
+        - { role: shell, bspwm }

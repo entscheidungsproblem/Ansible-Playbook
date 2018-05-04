@@ -14,8 +14,7 @@
       - xscreensaver
       - caffeine-ng
 
-
-name: pywal
+- name: Install Pywal
   pip:
     executable: pip3
     name: wal wal_steam

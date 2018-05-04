@@ -1,8 +1,7 @@
 ---
-
-name: Docker installation
+- name: Docker installation
   xbps:
-    pkg:
+    name:
       - docker 
       - docker-compose
-state: present
+  state: present

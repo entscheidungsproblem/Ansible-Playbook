@@ -87,16 +87,20 @@
 - name: Install cargo packages
   shell: "cargo install exa alacritty"
 
-- name: Install hideIt
+- name:  hideIt
   git:
     repo: https://github.com/tadly/hideIt.sh.git
     dest: ~/Git/
+
+- name: Install hideIt  
   shell: "ln -s ~/Git/hideIt.sh/hideIt.sh $SCRIPTS"
   
-- name: Install Color-Scripts
+- name: Download Color-Scripts
   git:
     repo: https://github.com/stark/Color-Scripts.git
     dest: ~/Git/
+    
+- name: Install Color-Scripts
   shell: "ln -s ~/Git/Color-Scripts/* $SCRIPTS"
  
 
@@ -106,3 +110,4 @@
     dest: "{{ ansible_env.HOME }}/.urxvt/ext"
     update: yes
     accept_hostkey: yes
+  state: present

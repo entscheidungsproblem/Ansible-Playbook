@@ -1,12 +1,12 @@
 ---
 
-name: VPN installation
+- name: VPN installation
   xbps:
     pkg:
       - openvpn
-state: present
+  state: present
 
-name: openpyn
+- name: openpyn
   pip:
     executable: pip3
     name: openpyn
