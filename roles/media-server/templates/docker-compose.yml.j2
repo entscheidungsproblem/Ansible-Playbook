@@ -1,0 +1,139 @@
+---
+version: '2'
+services:
+  sonarr:
+    image:  linuxserver/sonarr
+    container_name: sonarr
+    depends_on:
+      - jackett
+    links:
+      - jackett
+    volumes:
+      - /mnt/storage/config/sonarr:/config
+      - /mnt/storage/tv:/tv
+      - /mnt/storage/downloads/complete/tv:/downloads
+      - /etc/localtime:/etc/localtime:ro
+    # - /mnt/storage/downloads/complete/tv_import:/tv_import
+    ports:
+      - {{ sonarr-port }}:8989
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    restart:  always
+
+  radarr:
+      image: linuxserver/radarr
+      container_name: radarr
+      volumes:
+        - /mnt/storage/config/radarr:/config
+        - /mnt/storage/movies:/movies
+        - /mnt/storage/downloads/complete/movies:/downloads
+        - /etc/localtime:/etc/localtime:ro
+      ports:
+        - {{ radarr-port }}:7878
+      environment:
+        - PUID=${PUID}
+        - PGID=${PGID}
+        - TZ=${TZ}
+      restart:  always
+
+  lidarr:
+      image: linuxserver/lidarr
+      container_name: lidarr
+      volumes:
+        - /mnt/storage/config/lidarr:/config
+        - /mnt/storage/music:/music
+        - /mnt/storage/downloads/complete/music:/downloads
+      ports:
+        - 7879:7879
+      environment:
+        - PUID=${PUID}
+        - PGID=${PGID}
+      restart:  always
+
+  jackett:
+      image: linuxserver/jackett
+      container_name: jackett
+      volumes:
+        - /mnt/storage/jackett/config:/config
+        - /mnt/storage/jackett/downloads:/downloads
+        - /etc/localtime:/etc/localtime:ro
+      ports:
+        - 9117:9117
+      environment:
+        - PUID=${PUID}
+        - PGID=${PGID}
+        - TZ=${TZ}
+      restart:  always
+
+  transmission:
+    image: linuxserver/transmission
+    container_name: transmission
+    network_mode: host
+    volumes:
+      - /mnt/storage/config/transmission:/config
+      - /mnt/storage/downloads:/downloads
+    ports:
+        - 9091:9091
+        - 51413:51413
+        - 51413:51413/udp
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+    restart: always
+
+  deluge:
+    image: linuxserver/deluge
+    container_name: deluge
+    network_mode: host
+    volumes:
+      - /mnt/storage/config/deluge:/config
+      - /mnt/storage/downloads:/downloads
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK_SET=<022>
+    restart: always
+
+  ombi:
+    container_name: ombi
+    image: linuxserver/ombi
+    volumes:
+      - /mnt/storage/config/ombi:/config
+  #    - ${USERDIR}/docker/certs:/certs
+    ports:
+      - {{ ombi-port }}:3579
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}  
+    restart: always
+
+  heimdall:
+    container_name: heimdall
+    image: linuxserver/heimdall
+    volumes:
+      - /mnt/storage/config/heimdall:/config
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}  
+    restart: always
+
+  tautulli:
+    container_name: tautulli
+    image: linuxserver/tautulli
+    volumes:
+      - /mnt/storage/config/tautulli:/config
+      - /mnt/storage/logs/tautulli:/logs:ro
+    ports:
+      - {{ tautulli-port }}:8181
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}  
+    restart: always

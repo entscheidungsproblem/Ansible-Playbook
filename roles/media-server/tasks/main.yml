@@ -1,0 +1,49 @@
+---
+
+- name: Pull docker images
+  docker_image:
+    name: 
+      - linuxserver/transmission
+      - linuxserver/jackett
+      - linuxserver/sonarr
+      - linuxserver/radarr
+      - linuxserver/lidarr
+      - linuxserver/ombi
+      - plexinc/pms-docker
+      - portainer/portainer
+      - linuxserver/heimdall
+      - linuxserver/tautulli
+
+- name:  Download Sickbeard Mp4 Automator
+  git:
+    repo: https://github.com/mdhiggins/sickbeard_mp4_automator.git
+    dest: ~/Git/
+
+- name:  Download Sickbeard Mp4 Automator
+  pip:
+    executable: pip2
+    name:
+      - setuptools
+      - requests
+      - requests[security]
+      - requests-cache
+      - babelfish
+      - "guessit<2"
+      - "subliminal<2"
+      - python-dateutil
+      - deluge-client
+      - qtfaststart
+    state:  present
+
+- name: Uninstall stevedore
+  pip:
+    executable: pip2
+    name: stevedore
+    state: absent
+
+- name: Install stevedore 1.19.1
+  pip:
+    executable: pip2
+    name: stevedore
+    version: 1.19.1
+    state: present

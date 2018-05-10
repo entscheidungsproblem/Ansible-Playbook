@@ -1,4 +1,4 @@
 ---
 
 dependencies:
-- { role: shell}
+- { role: shell, python, cronie}

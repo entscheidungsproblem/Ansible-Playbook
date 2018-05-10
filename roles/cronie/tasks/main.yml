@@ -1,0 +1,15 @@
+---
+- name: Cronie installation
+  xbps:
+    name:
+      - cronie 
+  state: present
+
+- name: Configure alternative group
+  command: xbps-alternatives -s cronie -g crond
+  changed_when: false
+
+- name: Enable Daemon
+  runit:
+    name: crond
+  enabled: true

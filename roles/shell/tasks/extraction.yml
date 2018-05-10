@@ -1,0 +1,17 @@
+---
+
+- name: Install compression/extraction packages
+  xbps:
+    name:
+      - tar 
+      - zip 
+      - unzip
+      - bzip2
+      - lbzip2
+      - gzip
+      - pigz
+      - lzip
+      - plzip
+      - p7zip
+      - cabextract
+    state: present

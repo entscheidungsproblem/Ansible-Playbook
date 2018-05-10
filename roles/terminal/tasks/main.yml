@@ -1,0 +1,10 @@
+---
+
+- name: Install Urxvt
+  xbps:
+    name:
+      - rxvt-unicode
+      - urxvt-perls
+
+- name: Install Alacritty
+  shell: "cargo install exa alacritty"

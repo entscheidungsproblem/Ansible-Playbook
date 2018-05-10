@@ -1,13 +1,29 @@
 ---
 
-- name: VPN installation
+- name: Install VPN 
+  become: true   
+  become_method: sudo
   xbps:
     pkg:
       - openvpn
   state: present
 
-- name: openpyn
+- name: Install openpyn
+  become: true
+  become_method: sudo
   pip:
     executable: pip3
-    name: openpyn
+    name:   openpyn
+    state:  present
 
+- name: Init openpyn
+  become: true
+  become_method: sudo
+  shell:  openpyn --init
+
+- name: "Start VPN on reboot"
+  become: true
+  become_method: sudo
+  cron:
+    special_time: reboot
+    job: "openpyn --p2p ${VPN_COUNTRY}"

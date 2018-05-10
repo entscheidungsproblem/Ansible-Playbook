@@ -15,18 +15,6 @@
       - aspell-en 
       - words-en
       - espeak
-        # Extraction
-      - tar 
-      - zip 
-      - unzip
-      - bzip2
-      - lbzip2
-      - gzip
-      - pigz
-      - lzip
-      - plzip
-      - p7zip
-      - cabextract
         # Internet Tools
       - wget 
       - curl
@@ -54,9 +42,6 @@
       - albert
         # PDF
       - zathura
-        # urxvt Shell
-      - rxvt-unicode
-      - urxvt-perls
         # Bars
       - lemonbar
       - polybar
@@ -71,23 +56,10 @@
       - libvlc
         # Non-free
         # - void-repo-nonfree
-        # Steam
-      - flatpak
-        # Torrent
-      - deluge
-      - deluge-gtk
         # Latex
       - texlive
 
-- name: Install Steam
-  shell: "flatpak remove-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"
-  shell: "flatpak install flathub com.valvesoftware.Steam"
-  become_user: root
-
-- name: Install cargo packages
-  shell: "cargo install exa alacritty"
-
-- name:  hideIt
+- name: Download hideIt
   git:
     repo: https://github.com/tadly/hideIt.sh.git
     dest: ~/Git/

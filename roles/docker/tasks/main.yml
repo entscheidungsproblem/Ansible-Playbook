@@ -5,3 +5,16 @@
       - docker 
       - docker-compose
   state: present
+
+- name: Add user to docker group
+  user:
+    name: ${USER}
+    groups: docker
+
+- name: Set environment variables
+  copy:
+    content:  "PUID=${PUID}
+              PGID=${PGID}
+              TZ=${TZ}
+              USERDIR=${DIR}"
+    dest: /etc/environment

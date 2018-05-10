@@ -4,23 +4,23 @@
   shell: virtualbox_latest.sh
   register: virtualbox_link
 
-- name: Download VirtualBox  
+- name: Download VirtualBox
   get_url:
     url: virtualbox_link
     dest: virtualbox.run
     mode: 0755
 
-- name: Install VirtualBox   
+- name: Install VirtualBox
   become: true   
-  become_method: sudo   
+  become_method: sudo
   shell: ./virtualbox.run
 
 
-- name: Get Vagrant link   
+- name: Get Vagrant link
   shell: vagrant_latest.sh
   register: vagrant_link
 
-- name: Download Vagrant  
+- name: Download Vagrant
   get_url:
     url: vagrant_link
     dest: vagrant.tar.xz

@@ -6,5 +6,6 @@
     dest: ~/Git/
 
 - name: Install scripts
-  shell: "~/Git/nerd-fonts/install.sh $FONTNAMES"
-  
+  shell: ~/Git/nerd-fonts/install.sh 
+  with-items:
+    - "{{ fonts }}"
