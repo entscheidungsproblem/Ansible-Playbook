@@ -1,6 +1,6 @@
 ---
 
 - name: Setup Desktop
-  hosts: all
+  hosts: localhost
   roles:
     - { role: mergerfs }
