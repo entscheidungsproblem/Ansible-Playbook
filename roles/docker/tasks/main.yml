@@ -1,10 +1,28 @@
 ---
 - name: Docker installation
+  become: true   
+  become_method: sudo
   xbps:
     name:
       - docker 
       - docker-compose
-  state: present
+      - python-docker
+      - python3-docker
+    state: present
+
+- name: Docker-py installation (python2)
+  become: true   
+  become_method: sudo
+  pip:
+    executable: pip2
+    name: docker-py 
+
+- name: Docker-py installation (python3)
+  become: true   
+  become_method: sudo
+  pip:
+    executable: pip3
+    name: docker-py 
 
 - name: Add user to docker group
   user:

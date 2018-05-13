@@ -3,4 +3,4 @@
 - name: Setup Desktop
   hosts: localhost
   roles:
-    - { role: git }
+    - { role: media-server }

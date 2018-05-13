@@ -9,6 +9,8 @@
       - python3-flake8
       - python3-pip
       - python3-devel
+      - python
+      - python-pip
     state: present
 
 - name: Python component installation
