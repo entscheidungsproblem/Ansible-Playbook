@@ -10,18 +10,12 @@
     fstype: ext4
     dev: /dev/sd"{{ item }}"
     opts: -cc
-  loop:
-    - a
-    - b
-    - c
+  with_items: "{{ devices }}"
 
 
 - name: Add drive mount directories
   file: path=/mnt/data"{{ item }}" state=directory
-  loop:
-    - 0
-    - 1
-    - 2
+  with_items: "{{ devices }}"
 
 - name: Add storage directory
   file: path=/storage state=directory
@@ -29,13 +23,11 @@
 - name: Add fstab mount disk entries
   lineinfile:
         path: /etc/fstab
-        line: /dev/sd"{{ item.device }}" /mnt/data"{{ item.num }}"      auto   defaults,nobootwait,errors=remount-ro 0       2
-  loop: 
-    - { num: 0, device: a }
-    - { num: 1, device: b }
-    - { num: 2, device: c }
+        line: /dev/sd"{{ item }}" /mnt/data"{{ item }}"      auto   defaults,nobootwait,errors=remount-ro 0       2
+  with_items: "{{ devices }}"
 
 - name: Add fstab storage entry
   lineinfile:
     path: /etc/fstab
-    line: /mnt/data*  /storage  fuse.mergerfs  defaults,allow_other,direct_io,moveonenospc=true  0  0x
+    line: /mnt/data"{{ item }}"  /storage  fuse.mergerfs  defaults,allow_other,direct_io,moveonenospc=true  0  0x
+  with_items: "{{ devices }}"

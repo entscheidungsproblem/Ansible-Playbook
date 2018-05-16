@@ -14,12 +14,18 @@
       - linuxserver/heimdall
       - linuxserver/tautulli
 
+- name: ffmpeg installation
+  xbps:
+    name:
+      - ffmpeg 
+  state: present
+
 - name:  Download Sickbeard Mp4 Automator
   git:
     repo: https://github.com/mdhiggins/sickbeard_mp4_automator.git
     dest: ~/Git/
 
-- name:  Download Sickbeard Mp4 Automator
+- name:  Download Sickbeard Mp4 Automator dependencies
   pip:
     executable: pip2
     name:
@@ -47,3 +53,14 @@
     name: stevedore
     version: 1.19.1
     state: present
+
+- name: Install gevent for Deluge daemon
+  pip:
+    executable: pip2
+    name: gevent
+    state: present
+
+- name: 
+  template:
+    src: autoProcess.ini.j2
+    dest: ~/Git/sickbeard_mp4_automator/autoProcess.ini

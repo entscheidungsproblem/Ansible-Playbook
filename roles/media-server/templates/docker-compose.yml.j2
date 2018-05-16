@@ -9,78 +9,78 @@ services:
     links:
       - jackett
     volumes:
-      - /mnt/storage/config/sonarr:/config
-      - /mnt/storage/tv:/tv
-      - /mnt/storage/downloads/complete/tv:/downloads
+      - "{{ storage-root }}"/config/sonarr:/config
+      - "{{ storage-root }}"/tv:/tv
+      - "{{ storage-root }}"/downloads/complete/tv:/downloads
       - /etc/localtime:/etc/localtime:ro
-    # - /mnt/storage/downloads/complete/tv_import:/tv_import
+    # - "{{ storage-root }}"/downloads/complete/tv_import:/tv_import
     ports:
       - {{ sonarr-port }}:8989
     environment:
       - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
+      - PGID=${PGID
+      - TZ=${TZ}  
     restart:  always
 
   radarr:
-      image: linuxserver/radarr
-      container_name: radarr
-      volumes:
-        - /mnt/storage/config/radarr:/config
-        - /mnt/storage/movies:/movies
-        - /mnt/storage/downloads/complete/movies:/downloads
-        - /etc/localtime:/etc/localtime:ro
-      ports:
-        - {{ radarr-port }}:7878
-      environment:
-        - PUID=${PUID}
-        - PGID=${PGID}
-        - TZ=${TZ}
-      restart:  always
+    image: linuxserver/radarr
+    container_name: radarr
+    volumes:
+      - "{{ storage-root }}"/config/radarr:/config
+      - "{{ storage-root }}"/movies:/movies
+      - "{{ storage-root }}"/downloads/complete/movies:/downloads
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - {{ radarr-port }}:7878
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - TZ=${TZ}  
+    restart:  always
 
   lidarr:
-      image: linuxserver/lidarr
-      container_name: lidarr
-      volumes:
-        - /mnt/storage/config/lidarr:/config
-        - /mnt/storage/music:/music
-        - /mnt/storage/downloads/complete/music:/downloads
-      ports:
-        - 7879:7879
-      environment:
-        - PUID=${PUID}
-        - PGID=${PGID}
-      restart:  always
+    image: linuxserver/lidarr
+    container_name: lidarr
+    volumes:
+      - "{{ storage-root }}"/config/lidarr:/config
+      - "{{ storage-root }}"/music:/music
+      - "{{ storage-root }}"/downloads/complete/music:/downloads
+    ports:
+      - {{ lidarr-port }}:7879
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+    restart:  always
 
   jackett:
-      image: linuxserver/jackett
-      container_name: jackett
-      volumes:
-        - /mnt/storage/jackett/config:/config
-        - /mnt/storage/jackett/downloads:/downloads
-        - /etc/localtime:/etc/localtime:ro
-      ports:
-        - 9117:9117
-      environment:
-        - PUID=${PUID}
-        - PGID=${PGID}
-        - TZ=${TZ}
-      restart:  always
+    image: linuxserver/jackett
+    container_name: jackett
+    volumes:
+      - "{{ storage-root }}"/jackett/config:/config
+      - "{{ storage-root }}"/jackett/downloads:/downloads
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - {{ jackett-port }}:9117
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - TZ=${TZ}  
+    restart:  always
 
   transmission:
     image: linuxserver/transmission
     container_name: transmission
     network_mode: host
     volumes:
-      - /mnt/storage/config/transmission:/config
-      - /mnt/storage/downloads:/downloads
+      - "{{ storage-root }}"/config/transmission:/config
+      - "{{ storage-root }}"/downloads:/downloads
     ports:
         - 9091:9091
         - 51413:51413
         - 51413:51413/udp
     environment:
       - PUID=${PUID}
-      - PGID=${PGID}
+      - PGID=${PGID
     restart: always
 
   deluge:
@@ -88,11 +88,11 @@ services:
     container_name: deluge
     network_mode: host
     volumes:
-      - /mnt/storage/config/deluge:/config
-      - /mnt/storage/downloads:/downloads
+      - "{{ storage-root }}"/config/deluge:/config
+      - "{{ storage-root }}"/downloads:/downloads
     environment:
       - PUID=${PUID}
-      - PGID=${PGID}
+      - PGID=${PGID
       - UMASK_SET=<022>
     restart: always
 
@@ -100,40 +100,62 @@ services:
     container_name: ombi
     image: linuxserver/ombi
     volumes:
-      - /mnt/storage/config/ombi:/config
+      - "{{ storage-root }}"/config/ombi:/config
   #    - ${USERDIR}/docker/certs:/certs
     ports:
       - {{ ombi-port }}:3579
     environment:
       - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}  
+      - PGID=${PGID
+      - TZ=${TZ}   
     restart: always
 
   heimdall:
     container_name: heimdall
     image: linuxserver/heimdall
     volumes:
-      - /mnt/storage/config/heimdall:/config
+      - "{{ storage-root }}"/config/heimdall:/config
     ports:
       - 80:80
       - 443:443
     environment:
       - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}  
+      - PGID=${PGID
+      - TZ=${TZ}   
     restart: always
 
   tautulli:
     container_name: tautulli
     image: linuxserver/tautulli
     volumes:
-      - /mnt/storage/config/tautulli:/config
-      - /mnt/storage/logs/tautulli:/logs:ro
+      - "{{ storage-root }}"/config/tautulli:/config
+      - "{{ storage-root }}"/logs/tautulli:/logs:ro
     ports:
       - {{ tautulli-port }}:8181
     environment:
       - PUID=${PUID}
-      - PGID=${PGID}
+      - PGID=${PGID
       - TZ=${TZ}  
+    restart: always
+
+  watchtower:
+    image: v2tec/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 21600
+    tlsverify: true
+
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    volumes:
+      - "{{ storage-root }}"/config/plex:/config
+      - "{{ storage-root }}"/config/plex-transcode:/transcode
+      - "{{ storage-root }}"/movies:/data/movies
+      - "{{ storage-root }}"/tv:/data/tv
+      - "{{ storage-root }}"/music:/data/music
+    environment:
+      - TZ=${TZ}
+      - PLEX_CLAIM= "{{ plex-token }}"
+    network_mode: host  
     restart: always

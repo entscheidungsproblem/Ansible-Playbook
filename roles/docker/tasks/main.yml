@@ -24,15 +24,20 @@
     executable: pip3
     name: docker-py 
 
+- name: Create docker group
+  group:
+    name: docker
+    gid: "{{ gid }}"
+
 - name: Add user to docker group
   user:
-    name: ${USER}
+    name: "{{ ansible_env.USER }}"
     groups: docker
 
 - name: Set environment variables
-  copy:
-    content:  "PUID=${PUID}
-              PGID=${PGID}
-              TZ=${TZ}
-              USERDIR=${DIR}"
+  template:
+    src: environment.j2
     dest: /etc/environment
+    owner: root
+    group: root
+    mode: 0644
