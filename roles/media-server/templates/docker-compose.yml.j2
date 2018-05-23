@@ -15,7 +15,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     # - "{{ storage.root }}"/downloads/complete/tv_import:/tv_import
     ports:
-      - {{ sonarr.port }}:8989
+      - "{{ sonarr.port }}":8989
     environment:
       - PUID=${PUID}
       - PGID=${PGID
@@ -31,7 +31,7 @@ services:
       - "{{ storage.root }}"/downloads/complete/movies:/downloads
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - {{ radarr.port }}:7878
+      - "{{ radarr.port }}":7878
     environment:
       - PUID=${PUID}
       - PGID=${PGID
@@ -46,7 +46,7 @@ services:
       - "{{ storage.root }}"/music:/music
       - "{{ storage.root }}"/downloads/complete/music:/downloads
     ports:
-      - {{ lidarr-port }}:7879
+      - "{{ lidarr-port }}":7879
     environment:
       - PUID=${PUID}
       - PGID=${PGID
@@ -60,7 +60,7 @@ services:
       - "{{ storage.root }}"/jackett/downloads:/downloads
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - {{ jackett.port }}:9117
+      - "{{ jackett.port }}":9117
     environment:
       - PUID=${PUID}
       - PGID=${PGID
@@ -103,7 +103,7 @@ services:
       - "{{ storage.root }}"/config/ombi:/config
   #    - ${USERDIR}/docker/certs:/certs
     ports:
-      - {{ ombi.port }}:3579
+      - "{{ ombi.port }}":3579
     environment:
       - PUID=${PUID}
       - PGID=${PGID
@@ -131,7 +131,7 @@ services:
       - "{{ storage.root }}"/config/tautulli:/config
       - "{{ storage.root }}"/logs/tautulli:/logs:ro
     ports:
-      - {{ tautulli.port }}:8181
+      - "{{ tautulli.port }}":8181
     environment:
       - PUID=${PUID}
       - PGID=${PGID
