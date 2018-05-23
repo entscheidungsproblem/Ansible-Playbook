@@ -138,13 +138,6 @@ services:
       - TZ=${TZ}  
     restart: always
 
-  watchtower:
-    image: v2tec/watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 21600
-    tlsverify: true
-
   plex:
     container_name: plex
     image: plexinc/pms-docker
@@ -158,4 +151,13 @@ services:
       - TZ=${TZ}
       - PLEX_CLAIM= "{{ plex-token }}"
     network_mode: host  
+    restart: always
+
+  watchtower:
+    image: v2tec/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 21600
+    tlsverify: true
     restart: always

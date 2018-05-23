@@ -6,10 +6,7 @@
   xbps:     
     upgrade: yes
     name:       
-      - cargo
-      - rust
       - rust-doc
-      - rustup
       - rustfmt
 
 - name: Rust Update 

@@ -1,0 +1,11 @@
+--- 
+
+- name: Rust development installation
+  become: true   
+  become_method: sudo   
+  xbps:     
+    upgrade: yes
+    name:       
+      - cargo
+      - rust
+      - rustup
