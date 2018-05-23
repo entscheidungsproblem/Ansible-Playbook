@@ -69,12 +69,12 @@ password = "{{ deluge.password }}"
 sonarr-label = sonarr
 radarr-label = radarr
 bypass-label = bypass
-port = {{ deluge.port}} #58846
+port = "{{ deluge.port}}" #58846
 output_directory =
 remove = false
 
 [Plex]
 host = localhost
-port = {{ plex.port}} #32400
+port = "{{ plex.port}}" #32400
 refresh = True
 token = "{{ plex.token }}"
