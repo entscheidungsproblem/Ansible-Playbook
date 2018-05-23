@@ -10,3 +10,16 @@
       - cargo
       - rust
       - rustup
+
+- name: Rust install stable toolchain
+  shell: rustup install stable
+
+- name: Rust set stable toolchain
+  shell: rustup default stable
+
+- name: Rust Update 
+  become: true   
+  become_method: sudo
+  shell: rustup update
+
+
