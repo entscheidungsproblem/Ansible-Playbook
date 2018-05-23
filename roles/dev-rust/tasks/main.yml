@@ -20,4 +20,4 @@
   shell: rustup component add rls-preview rust-analysis rust-src
 
 - name: Rust Language Server 
-  shell: cargo install rls
+  shell: cargo install rls --force
