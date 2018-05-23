@@ -69,10 +69,10 @@
     name: gevent
     state: present
 
-- name: Create autoProcess.ini
-  template:
-    src: autoProcess.ini.j2
-    dest: ~/Git/sickbeard_mp4_automator/autoProcess.ini
+#- name: Create autoProcess.ini
+#  template:
+#    src: autoProcess.ini.j2
+#    dest: ~/Git/sickbeard_mp4_automator/autoProcess.ini
 
 - name: Create docker-compose.yml
   template:
