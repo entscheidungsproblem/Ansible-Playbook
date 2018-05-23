@@ -72,4 +72,4 @@
 - name: Create docker-compose.yml
   template:
     src: docker-compose.yml.j2
-    dest: " {{ storage-root }} "/docker/docker-compose.yml
+    dest: " {{ storage-root }}/docker/docker-compose.yml"

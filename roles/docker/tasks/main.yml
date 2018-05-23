@@ -29,6 +29,7 @@
   #become_method: sudo
   pip:
     executable: pip2
+    umask: "0755"
     name: docker-py 
 
 - name: Docker-py installation (python3)
@@ -36,6 +37,7 @@
   #become_method: sudo
   pip:
     executable: pip3
+    umask: "0755"
     name: docker-py 
 
 - name: Create docker group
