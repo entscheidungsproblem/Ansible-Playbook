@@ -69,6 +69,11 @@
     name: gevent
     state: present
 
+- name: Create docker directory
+  file: " {{ storage.root }}/docker/"
+  state: directory
+  mode: 0755
+
 #- name: Create autoProcess
 #  template:
 #    src: autoProcess.ini.j2
