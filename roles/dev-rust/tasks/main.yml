@@ -11,7 +11,7 @@
 
 - name: Rust Update 
   become: true   
-  become_method: sudo   
+  become_method: sudo
   shell: rustup update
 
 - name: Rust components installation 

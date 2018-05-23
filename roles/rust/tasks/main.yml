@@ -5,6 +5,7 @@
   become_method: sudo   
   xbps:     
     upgrade: yes
+    force: yes
     name:       
       - cargo
       - rust
