@@ -1,0 +1,17 @@
+---
+
+sonarr: 
+  api: 
+
+radarr: 
+  api: 
+
+lidarr: 
+  api: 
+
+deluge:
+  username: 
+  password:
+
+plex:
+  token:

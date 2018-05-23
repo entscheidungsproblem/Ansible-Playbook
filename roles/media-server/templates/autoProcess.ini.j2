@@ -1,20 +1,20 @@
 [Sonarr]
 host = localhost
-port = {{ sonarr-port }} #8989
+port = {{ sonarr.port }} #8989
 web_root =
 ssl = True
-apikey = {{ sonarr-api }}
+apikey = {{ sonarr.api }}
 
 [Radarr]
 host = localhost
-port = {{ radarr-port }} #7878
+port = {{ radarr.port }} #7878
 web_root =
 ssl = True
-apikey = {{ radarr-api }}
+apikey = {{ radarr.api }}
 
 [MP4]
-ffmpeg = {{ ffmpeg-location }} #/usr/bin/ffmpeg
-ffprobe = {{ ffprobe-location }} #/usr/bin/ffprobe
+ffmpeg = {{ ffmpeg.location }} #/usr/bin/ffmpeg
+ffprobe = {{ ffprobe.location }} #/usr/bin/ffprobe
 threads = auto
 output_directory =
 copy_to =
@@ -63,18 +63,18 @@ aac_adtstoasc = False
 
 [Deluge]
 host = localhost
-username = {{ deluge-username }}
+username = {{ deluge.username }}
 convert = True
-password = {{ deluge-password }}
+password = {{ deluge.password }}
 sonarr-label = sonarr
 radarr-label = radarr
 bypass-label = bypass
-port = {{ deluge-port}} #58846
+port = {{ deluge.port}} #58846
 output_directory =
 remove = false
 
 [Plex]
 host = localhost
-port = {{ plex-port}} #32400
+port = {{ plex.port}} #32400
 refresh = True
-token = {{ plex-token }}
+token = {{ plex.token }}

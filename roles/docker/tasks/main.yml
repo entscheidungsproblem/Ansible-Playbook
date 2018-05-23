@@ -25,15 +25,15 @@
     state: latest 
 
 - name: Docker-py installation (python2)
-  become: true   
-  become_method: sudo
+  #become: true   
+  #become_method: sudo
   pip:
     executable: pip2
     name: docker-py 
 
 - name: Docker-py installation (python3)
-  become: true   
-  become_method: sudo
+  #become: true   
+  #become_method: sudo
   pip:
     executable: pip3
     name: docker-py 
