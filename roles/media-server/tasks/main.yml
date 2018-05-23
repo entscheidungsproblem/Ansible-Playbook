@@ -1,13 +1,13 @@
 ---
 
-- name: Pull docker images
-  become: true   
-  become_method: sudo
-  docker_image:
-    name: 
-      - "{{ item }}"
-  with_items:
-    - linuxserver/transmission
+#- name: Pull docker images
+  #become: true   
+  #become_method: sudo
+  #docker_image:
+  #  name: 
+  #    - "{{ item }}"
+  #with_items:
+    #- linuxserver/transmission
     # - linuxserver/jackett
     # - linuxserver/sonarr
     # - linuxserver/radarr
