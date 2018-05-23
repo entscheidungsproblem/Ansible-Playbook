@@ -1,17 +1,26 @@
 --- 
+
 - name: Rust development installation
   become: true   
   become_method: sudo   
   xbps:     
+    upgrade: yes
     name:       
       - cargo
       - rust
       - rust-doc
       - rustup
       - rustfmt
-    state: present
 
-- name: Rust component installation  
+- name: Rust Update 
+  become: true   
+  become_method: sudo   
   shell: rustup update
+
+- name: Rust components installation 
+  become: true   
+  become_method: sudo   
   shell: rustup component add rls-preview rust-analysis rust-src
+
+- name: Rust Language Server 
   shell: cargo install rls

@@ -1,18 +1,22 @@
 ---
 
 - name: Pull docker images
+  become: true   
+  become_method: sudo
   docker_image:
     name: 
-      - linuxserver/transmission
-      - linuxserver/jackett
-      - linuxserver/sonarr
-      - linuxserver/radarr
-      - linuxserver/lidarr
-      - linuxserver/ombi
-      - plexinc/pms-docker
-      - portainer/portainer
-      - linuxserver/heimdall
-      - linuxserver/tautulli
+      - "{{ item }}"
+  with_items:
+    - linuxserver/transmission
+    # - linuxserver/jackett
+    # - linuxserver/sonarr
+    # - linuxserver/radarr
+    # - linuxserver/lidarr
+    # - linuxserver/ombi
+    # - plexinc/pms-docker
+    # - portainer/portainer
+    # - linuxserver/heimdall
+    # - linuxserver/tautulli
 
 - name: ffmpeg installation
   xbps:

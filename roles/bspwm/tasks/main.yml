@@ -1,5 +1,7 @@
 ---
 - name: Install bspwm packages
+  become: true   
+  become_method: sudo
   xbps:
     pkg:
       - libxcb #libxcb-devel

@@ -1,4 +1,4 @@
 ---
 
 dependencies:
-- { role: rust, xorg }
+        - { role: dev-rust, xorg }

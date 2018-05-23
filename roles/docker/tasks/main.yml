@@ -6,9 +6,23 @@
     name:
       - docker 
       - docker-compose
-      - python-docker
-      - python3-docker
     state: present
+
+- name: Upgrade pip2
+  become: true   
+  become_method: sudo
+  pip:
+    executable: pip
+    name: pip
+    state: latest
+    
+- name: Upgrade pip3
+  become: true   
+  become_method: sudo
+  pip:
+    executable: pip3
+    name: pip
+    state: latest 
 
 - name: Docker-py installation (python2)
   become: true   
@@ -25,19 +39,40 @@
     name: docker-py 
 
 - name: Create docker group
+  become: true   
+  become_method: sudo
   group:
     name: docker
     gid: "{{ gid }}"
 
 - name: Add user to docker group
+  become: true   
+  become_method: sudo
   user:
     name: "{{ ansible_env.USER }}"
     groups: docker
 
 - name: Set environment variables
+  become: true   
+  become_method: sudo
   template:
     src: environment.j2
     dest: /etc/environment
     owner: root
     group: root
     mode: 0644
+
+- name: Link docker service
+  become: true   
+  become_method: sudo
+  file:
+    src: /etc/sv/docker
+    dest: /var/service/docker
+    state: link  
+
+- name: start docker
+  become: true   
+  become_method: sudo
+  runit:
+    name: docker
+    state: started

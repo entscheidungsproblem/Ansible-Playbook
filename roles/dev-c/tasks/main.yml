@@ -12,4 +12,3 @@
       - gdb
       - clang
       - clang-tools-extra
-    state: present

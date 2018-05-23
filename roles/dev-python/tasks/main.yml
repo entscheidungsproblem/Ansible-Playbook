@@ -13,7 +13,7 @@
       - python-pip
     state: present
 
-- name: Python component installation
-  pip:
-    executable: pip2
-    name: python-language-server[all]
+    #- name: Python component installation
+    #pip:
+    #executable: pip2
+    #name: python-language-server[all]

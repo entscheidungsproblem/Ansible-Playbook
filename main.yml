@@ -1,6 +1,5 @@
 ---
 
-- name: Setup Desktop
-  hosts: localhost
+- hosts: all
   roles:
-    - { role: media-server }
+    - { role: terminal }
