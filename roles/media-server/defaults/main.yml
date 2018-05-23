@@ -7,13 +7,13 @@ user-name: mainuser
 storage-root: "/mnt/storage" 
 
 sonarr: 
-  port: 8989
+  port: "8989"
 
 radarr: 
-  port: 7878
+  port: "7878"
 
 lidarr: 
-  port: 8989
+  port: "8989"
 
 ffmpeg:
   location: /usr/bin/ffmpeg
@@ -22,13 +22,13 @@ ffprobe:
   location: /usr/bin/ffprobe
 
 deluge:
-  port: 58846
+  port: "58846"
 
 plex:
-  port: 32400
+  port: "32400"
 
 ombi:
-  port: 3579
+  port: "3579"
 
 tautulli:
-  port: 8181
+  port: "8181"
