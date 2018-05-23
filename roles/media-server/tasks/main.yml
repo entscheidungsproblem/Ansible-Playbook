@@ -30,6 +30,7 @@
     dest: ~/Git/
 
 - name:  Download Sickbeard Mp4 Automator dependencies
+  become: true
   pip:
     executable: pip2
     name:
@@ -46,12 +47,14 @@
     state:  present
 
 - name: Uninstall stevedore
+  become: true
   pip:
     executable: pip2
     name: stevedore
     state: absent
 
 - name: Install stevedore 1.19.1
+  become: true
   pip:
     executable: pip2
     name: stevedore
@@ -59,6 +62,7 @@
     state: present
 
 - name: Install gevent for Deluge daemon
+  become: true
   pip:
     executable: pip2
     name: gevent
