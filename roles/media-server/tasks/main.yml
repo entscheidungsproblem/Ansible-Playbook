@@ -31,6 +31,7 @@
 
 - name:  Download Sickbeard Mp4 Automator dependencies
   become: true
+  become_method: sudo
   pip:
     executable: pip2
     name:
