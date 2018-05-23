@@ -15,7 +15,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     # - "{{ storage.root }}"/downloads/complete/tv_import:/tv_import
     ports:
-      - "{{ sonarr.port }}":8989
+      - "{{ sonarr_port }}":8989
     environment:
       - PUID=${PUID}
       - PGID=${PGID

@@ -7,7 +7,7 @@ user-name: mainuser
 storage:
   root: "/mnt/storage" 
 
-sonarr.port: "8989"
+sonarr_port: "8989"
 
 radarr: 
   port: "7878"
