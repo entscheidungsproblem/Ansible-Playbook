@@ -16,6 +16,5 @@
   # https://flathub.org/repo/flathub.flatpakrepo
 
 - name: Installing Steam
-  become: true   
-  become_method: sudo
+  when: result|success
   shell: "flatpak install flathub com.valvesoftware.Steam"
