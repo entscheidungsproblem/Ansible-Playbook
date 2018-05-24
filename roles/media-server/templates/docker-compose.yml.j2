@@ -21,3 +21,143 @@ services:
       - PGID=${PGID
       - TZ=${TZ}  
     restart:  always
+
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    volumes:
+      - "{{ storage.root }}"/config/radarr:/config
+      - "{{ storage.root }}"/movies:/movies
+      - "{{ storage.root }}"/downloads/complete/movies:/downloads
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "{{ radarr.port }}":7878
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - TZ=${TZ}  
+    restart:  always
+
+  lidarr:
+    image: linuxserver/lidarr
+    container_name: lidarr
+    volumes:
+      - "{{ storage.root }}"/config/lidarr:/config
+      - "{{ storage.root }}"/music:/music
+      - "{{ storage.root }}"/downloads/complete/music:/downloads
+    ports:
+      - "{{ lidarr-port }}":7879
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+    restart:  always
+
+  jackett:
+    image: linuxserver/jackett
+    container_name: jackett
+    volumes:
+      - "{{ storage.root }}"/jackett/config:/config
+      - "{{ storage.root }}"/jackett/downloads:/downloads
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "{{ jackett.port }}":9117
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - TZ=${TZ}  
+    restart:  always
+
+  transmission:
+    image: linuxserver/transmission
+    container_name: transmission
+    network_mode: host
+    volumes:
+      - "{{ storage.root }}"/config/transmission:/config
+      - "{{ storage.root }}"/downloads:/downloads
+    ports:
+        - 9091:9091
+        - 51413:51413
+        - 51413:51413/udp
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+    restart: always
+
+  deluge:
+    image: linuxserver/deluge
+    container_name: deluge
+    network_mode: host
+    volumes:
+      - "{{ storage.root }}"/config/deluge:/config
+      - "{{ storage.root }}"/downloads:/downloads
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - UMASK_SET=<022>
+    restart: always
+
+  ombi:
+    container_name: ombi
+    image: linuxserver/ombi
+    volumes:
+      - "{{ storage.root }}"/config/ombi:/config
+  #    - ${USERDIR}/docker/certs:/certs
+    ports:
+      - "{{ ombi.port }}":3579
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - TZ=${TZ}   
+    restart: always
+
+  heimdall:
+    container_name: heimdall
+    image: linuxserver/heimdall
+    volumes:
+      - "{{ storage.root }}"/config/heimdall:/config
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - TZ=${TZ}   
+    restart: always
+
+  tautulli:
+    container_name: tautulli
+    image: linuxserver/tautulli
+    volumes:
+      - "{{ storage.root }}"/config/tautulli:/config
+      - "{{ storage.root }}"/logs/tautulli:/logs:ro
+    ports:
+      - "{{ tautulli.port }}":8181
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - TZ=${TZ}  
+    restart: always
+
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    volumes:
+      - "{{ storage.root }}"/config/plex:/config
+      - "{{ storage.root }}"/config/plex-transcode:/transcode
+      - "{{ storage.root }}"/movies:/data/movies
+      - "{{ storage.root }}"/tv:/data/tv
+      - "{{ storage.root }}"/music:/data/music
+    environment:
+      - TZ=${TZ}
+      - PLEX_CLAIM= "{{ plex.token }}"
+    network_mode: host  
+    restart: always
+
+  watchtower:
+    image: v2tec/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 21600
+    tlsverify: true
+    restart: always
