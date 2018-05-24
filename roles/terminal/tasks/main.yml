@@ -6,8 +6,6 @@
       - rxvt-unicode
       - urxvt-perls
 
-
-
 - name: Install Alacritty
   xbps:
     name:

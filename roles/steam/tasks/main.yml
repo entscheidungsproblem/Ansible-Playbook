@@ -11,7 +11,9 @@
 - name: Install Flathub repo
   become: true   
   become_method: sudo
-  shell: "flatpak remove-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"
+  shell: "flatpak --user remove-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
+
+  # https://flathub.org/repo/flathub.flatpakrepo
 
 - name: Installing Steam
   become: true   
