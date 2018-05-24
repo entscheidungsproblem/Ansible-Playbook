@@ -21,3 +21,19 @@ services:
       - PGID=${PGID
       - TZ=${TZ}  
     restart:  always
+
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    volumes:
+      - "{{ storage.root }}"/config/radarr:/config
+      - "{{ storage.root }}"/movies:/movies
+      - "{{ storage.root }}"/downloads/complete/movies:/downloads
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "{{ radarr.port }}":7878
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - TZ=${TZ}  
+    restart:  always
