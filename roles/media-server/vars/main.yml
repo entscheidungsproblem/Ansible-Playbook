@@ -1,17 +1,13 @@
 ---
 
-sonarr: 
-  api: 
+sonarr_api: 
 
-radarr: 
-  api: 
+radarr_api: 
 
-lidarr: 
-  api: 
+lidarr_api: 
 
 deluge:
   username: 
   password:
 
-plex:
-  token:
+plex_token:
