@@ -23,3 +23,5 @@ plex_port: "32400"
 ombi_port: "3579"
 
 tautulli_port: "8181"
+
+jackett_port: "9117"
