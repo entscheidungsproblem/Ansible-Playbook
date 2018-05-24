@@ -5,9 +5,9 @@
   become_method: sudo   
   xbps:     
     name:      
-            - zsh
-            - zsh-syntax-highlighting
-            - zsh-completions
+      - zsh
+      - zsh-syntax-highlighting
+      - zsh-completions
     state: present
 
 - name: Oh-My-Zsh

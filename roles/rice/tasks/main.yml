@@ -1,6 +1,8 @@
 ---
 
 - name: Install customization packages
+  
+  become_method: sudo
   xbps:
     pkg:
       - ImageMagick
@@ -15,7 +17,8 @@
       - caffeine-ng
 
 - name: Install Pywal
+  become: true
   pip:
     executable: pip3
-    name: wal wal_steam
+    name: pywal wal_steam
 
