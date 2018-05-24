@@ -1,16 +1,16 @@
 [Sonarr]
 host = localhost
-port = "{{ sonarr.port }}" #8989
+port = "{{ sonarr_port }}" #8989
 web_root =
 ssl = True
-apikey = "{{ sonarr.api }}"
+apikey = "{{ sonarr_api }}"
 
 [Radarr]
 host = localhost
-port = "{{ radarr.port }}" #7878
+port = "{{ radarr_port }}" #7878
 web_root =
 ssl = True
-apikey = "{{ radarr.api }}"
+apikey = "{{ radarr_api }}"
 
 [MP4]
 ffmpeg = "{{ ffmpeg.location }}" #/usr/bin/ffmpeg
@@ -75,6 +75,6 @@ remove = false
 
 [Plex]
 host = localhost
-port = "{{ plex.port}}" #32400
+port = "{{ plex_port}}" #32400
 refresh = True
-token = "{{ plex.token }}"
+token = "{{ plex_token }}"

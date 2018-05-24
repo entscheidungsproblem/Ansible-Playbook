@@ -77,10 +77,10 @@
     state: directory
     mode: 0755
 
-#- name: Create autoProcess
-#  template:
-#    src: autoProcess.ini.j2
-#    dest: ~/Git/sickbeard_mp4_automator/autoProcess.ini
+- name: Create autoProcess
+  template:
+    src: autoProcess.ini.j2
+    dest: ~/Git/sickbeard_mp4_automator/autoProcess.ini
 
 - name: Create docker-compose
   template:

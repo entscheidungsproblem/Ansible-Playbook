@@ -1,5 +1,7 @@
 ---
 - name: Mergerfs installation
+  become: true
+  become_method: sudo
   xbps:
     name:
       - mergerfs 
