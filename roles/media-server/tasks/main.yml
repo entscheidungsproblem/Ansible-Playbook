@@ -73,9 +73,9 @@
 
 - name: Create docker directory
   file: 
-  path: " {{ storage.root }}/docker/"
-  state: directory
-  mode: 0755
+    path: " {{ storage.root }}/docker/"
+    state: directory
+    mode: 0755
 
 #- name: Create autoProcess
 #  template:
