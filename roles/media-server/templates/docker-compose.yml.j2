@@ -46,7 +46,7 @@ services:
       - "{{ storage }}"/music:/music
       - "{{ storage }}"/downloads/complete/music:/downloads
     ports:
-      - "{{ lidarr-port }}":7879
+      - "{{ lidarr_port }}":7879
     environment:
       - PUID=${PUID}
       - PGID=${PGID
@@ -60,7 +60,7 @@ services:
       - "{{ storage }}"/jackett/downloads:/downloads
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "{{ jackett.port }}":9117
+      - "{{ jackett_port }}":9117
     environment:
       - PUID=${PUID}
       - PGID=${PGID
