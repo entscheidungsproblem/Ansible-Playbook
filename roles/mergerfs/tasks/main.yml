@@ -11,7 +11,7 @@
 - name: Create a ext4 filesystem on /dev/sd"{{ item }}"
   filesystem:
     fstype: ext4
-    dev: /dev/sd"{{ item }}"
+    dev: "/dev/sd{{ item }}"
     opts: -cc
   with_items: "{{ devices }}"
 
