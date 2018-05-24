@@ -17,4 +17,4 @@
 
 - name: Installing Steam
   when: result|success
-  shell: "flatpak install flathub com.valvesoftware.Steam"
+  shell: "flatpak --user install flathub com.valvesoftware.Steam"
