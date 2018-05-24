@@ -19,12 +19,16 @@
 
 
 - name: Add drive mount directories
+  become: true
+  become_method: sudo
   file: 
     path: "/mnt/data{{ item }}" 
     state: directory
   with_items: "{{ devices }}"
 
 - name: Add storage directory
+  become: true
+  become_method: sudo
   file: 
     path: /mnt/storage 
     state: directory
