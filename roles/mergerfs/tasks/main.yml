@@ -5,6 +5,7 @@
   xbps:
     name:
       - mergerfs 
+      - fuse
   state: present
 
 - name: Create a ext4 filesystem on /dev/sd"{{ item }}"
@@ -23,13 +24,19 @@
   file: path=/storage state=directory
 
 - name: Add fstab mount disk entries
-  lineinfile:
-        path: /etc/fstab
-        line: /dev/sd"{{ item }}" /mnt/data"{{ item }}"      auto   defaults,nobootwait,errors=remount-ro 0       2
+  mount:
+    name: /mnt/data"{{ item }}"
+    src: /dev/sd"{{ item }}"
+    opts: defaults,allow_other,use_ino,errors=remount-ro
+    fstype: ext4
+    state: mounted
   with_items: "{{ devices }}"
 
 - name: Add fstab storage entry
-  lineinfile:
-    path: /etc/fstab
-    line: /mnt/data"{{ item }}"  /storage  fuse.mergerfs  defaults,allow_other,direct_io,moveonenospc=true  0  0x
+  mount:
+    name: /mnt/storage
+    src: /mnt/data"{{ item }}"
+    opts: defaults,allow_other,use_ino,hard_remove
+    fstype: fuse.mergerfs
+    state: mounted
   with_items: "{{ devices }}"
