@@ -19,6 +19,8 @@
     # - linuxserver/tautulli
 
 - name: ffmpeg installation
+  become: true
+  become_method: sudo
   xbps:
     name:
       - ffmpeg 
