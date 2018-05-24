@@ -1,7 +1,7 @@
 ---
 
 - name: Install customization packages
-  
+  become: true
   become_method: sudo
   xbps:
     pkg:
@@ -17,7 +17,6 @@
       - caffeine-ng
 
 - name: Install Pywal
-  become: true
   pip:
     executable: pip3
     name: pywal wal_steam
