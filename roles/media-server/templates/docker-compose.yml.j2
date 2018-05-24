@@ -51,3 +51,113 @@ services:
       - PUID=${PUID}
       - PGID=${PGID
     restart:  always
+
+  jackett:
+    image: linuxserver/jackett
+    container_name: jackett
+    volumes:
+      - "{{ storage }}"/jackett/config:/config
+      - "{{ storage }}"/jackett/downloads:/downloads
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "{{ jackett.port }}":9117
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - TZ=${TZ}  
+    restart:  always
+
+  transmission:
+    image: linuxserver/transmission
+    container_name: transmission
+    network_mode: host
+    volumes:
+      - "{{ storage }}"/config/transmission:/config
+      - "{{ storage }}"/downloads:/downloads
+    ports:
+        - 9091:9091
+        - 51413:51413
+        - 51413:51413/udp
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+    restart: always
+
+  deluge:
+    image: linuxserver/deluge
+    container_name: deluge
+    network_mode: host
+    volumes:
+      - "{{ storage }}"/config/deluge:/config
+      - "{{ storage }}"/downloads:/downloads
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - UMASK_SET=<022>
+    restart: always
+
+  ombi:
+    container_name: ombi
+    image: linuxserver/ombi
+    volumes:
+      - "{{ storage }}"/config/ombi:/config
+  #    - ${USERDIR}/docker/certs:/certs
+    ports:
+      - "{{ ombi_port }}":3579
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - TZ=${TZ}   
+    restart: always
+
+  heimdall:
+    container_name: heimdall
+    image: linuxserver/heimdall
+    volumes:
+      - "{{ storage }}"/config/heimdall:/config
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - TZ=${TZ}   
+    restart: always
+
+  tautulli:
+    container_name: tautulli
+    image: linuxserver/tautulli
+    volumes:
+      - "{{ storage }}"/config/tautulli:/config
+      - "{{ storage }}"/logs/tautulli:/logs:ro
+    ports:
+      - "{{ tautulli_port }}":8181
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
+      - TZ=${TZ}  
+    restart: always
+
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    volumes:
+      - "{{ storage }}"/config/plex:/config
+      - "{{ storage }}"/config/plex-transcode:/transcode
+      - "{{ storage }}"/movies:/data/movies
+      - "{{ storage }}"/tv:/data/tv
+      - "{{ storage }}"/music:/data/music
+    environment:
+      - TZ=${TZ}
+      - PLEX_CLAIM= "{{ plex_token }}"
+    network_mode: host  
+    restart: always
+
+  watchtower:
+    image: v2tec/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 21600
+    tlsverify: true
+    restart: always
