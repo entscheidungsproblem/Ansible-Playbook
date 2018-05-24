@@ -10,7 +10,7 @@ storage:
 sonarr_port: "8989"
 
 radarr: 
-  port: "7878"
+  - port: "7878"
 
 lidarr: 
   port: "8989"
