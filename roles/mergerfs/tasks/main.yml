@@ -9,6 +9,8 @@
   state: present
 
 - name: Create a ext4 filesystem on /dev/sd"{{ item }}"
+  become: true
+  become_method: sudo
   filesystem:
     fstype: ext4
     dev: "/dev/sd{{ item }}"
@@ -17,13 +19,17 @@
 
 
 - name: Add drive mount directories
-  file: path=/mnt/data"{{ item }}" state=directory
+  file: path=/mnt/data"{{ item }}" 
+    state: directory
   with_items: "{{ devices }}"
 
 - name: Add storage directory
-  file: path=/storage state=directory
+  file: path=/mnt/storage 
+    state: directory
 
 - name: Add fstab mount disk entries
+  become: true
+  become_method: sudo
   mount:
     name: /mnt/data"{{ item }}"
     src: /dev/sd"{{ item }}"
@@ -33,6 +39,8 @@
   with_items: "{{ devices }}"
 
 - name: Add fstab storage entry
+  become: true
+  become_method: sudo
   mount:
     name: /mnt/storage
     src: /mnt/data"{{ item }}"
