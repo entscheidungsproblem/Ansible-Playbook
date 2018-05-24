@@ -9,11 +9,11 @@ services:
     links:
       - jackett
     volumes:
-      - "{{ storage.root }}"/config/sonarr:/config
-      - "{{ storage.root }}"/tv:/tv
-      - "{{ storage.root }}"/downloads/complete/tv:/downloads
+      - "{{ storage }}"/config/sonarr:/config
+      - "{{ storage }}"/tv:/tv
+      - "{{ storage }}"/downloads/complete/tv:/downloads
       - /etc/localtime:/etc/localtime:ro
-    # - "{{ storage.root }}"/downloads/complete/tv_import:/tv_import
+    # - "{{ storage }}"/downloads/complete/tv_import:/tv_import
     ports:
       - "{{ sonarr_port }}":8989
     environment:
@@ -26,9 +26,9 @@ services:
     image: linuxserver/radarr
     container_name: radarr
     volumes:
-      - "{{ storage.root }}"/config/radarr:/config
-      - "{{ storage.root }}"/movies:/movies
-      - "{{ storage.root }}"/downloads/complete/movies:/downloads
+      - "{{ storage }}"/config/radarr:/config
+      - "{{ storage }}"/movies:/movies
+      - "{{ storage }}"/downloads/complete/movies:/downloads
       - /etc/localtime:/etc/localtime:ro
     ports:
       - "{{ radarr_port }}":7878
@@ -36,4 +36,18 @@ services:
       - PUID=${PUID}
       - PGID=${PGID
       - TZ=${TZ}  
+    restart:  always
+
+  lidarr:
+    image: linuxserver/lidarr
+    container_name: lidarr
+    volumes:
+      - "{{ storage }}"/config/lidarr:/config
+      - "{{ storage }}"/music:/music
+      - "{{ storage }}"/downloads/complete/music:/downloads
+    ports:
+      - "{{ lidarr-port }}":7879
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID
     restart:  always

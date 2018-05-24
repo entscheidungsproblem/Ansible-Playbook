@@ -73,7 +73,7 @@
 
 - name: Create docker directory
   file: 
-    path: " {{ storage.root }}/docker/"
+    path: " {{ storage }}/docker/"
     state: directory
     mode: 0755
 
@@ -85,4 +85,4 @@
 - name: Create docker-compose
   template:
     src: "docker-compose.yml.j2"
-    dest: " {{ storage.root }}/docker/docker-compose.yml"
+    dest: " {{ storage }}/docker/docker-compose.yml"

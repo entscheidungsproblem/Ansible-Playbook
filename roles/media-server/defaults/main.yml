@@ -4,8 +4,7 @@ tz: "UTC"
 gid: 140
 uid: 1000
 user-name: mainuser
-storage:
-  root: "/mnt/storage" 
+storage: "/mnt/storage" 
 
 sonarr_port: "8989"
 
