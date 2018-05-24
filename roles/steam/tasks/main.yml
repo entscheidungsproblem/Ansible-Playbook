@@ -9,7 +9,7 @@
   state: present
 
 - name: Install Flathub repo
-  shell: "flatpak --user remove-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
+  shell: "flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
 
   # https://flathub.org/repo/flathub.flatpakrepo
 
