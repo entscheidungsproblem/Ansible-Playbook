@@ -29,7 +29,7 @@
 - name:  Download Sickbeard Mp4 Automator
   git:
     repo: https://github.com/mdhiggins/sickbeard_mp4_automator.git
-    dest: ~/Git/
+    dest: ~/Git/sickbeard_mp4_automator
 
 - name:  Download Sickbeard Mp4 Automator dependencies
   become: true
