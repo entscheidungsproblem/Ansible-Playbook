@@ -16,22 +16,21 @@
       - parted
   state: present
 
-- name: Read device information (always use unit when probing)
-  become: true
-  become_method: sudo
-  parted: device=/dev/sd"{{ item }}" unit=MiB
-  register: info
-  with_items: "{{ devices }}"
+#- name: Read device information (always use unit when probing)
+#  become: true
+#  become_method: sudo
+#  parted: device=/dev/sd"{{ item }}" unit=MiB
+#  register: info
+#  with_items: "{{ devices }}"
 
-- name: Remove all partitions from /dev/sd"{{ item.dev }}"
-  become: true
-  become_method: sudo
-  parted:
-    device: "/dev/sd{{ item.dev }}"
-    number: "{{ item.info.num }}"
-    state: absent
-  with_items:
-   - { info: '"{{ info.partitions }}"', dev: '"{{ devices }}"' }
+#- name: Remove all partitions from /dev/sd"{{ item.dev }}"
+#  become: true
+#  become_method: sudo
+#  parted:
+#    device: "/dev/sd{{ item.name }}"
+#    number: "{{ item.partitions.num }}"
+#    state: absent
+#  with_items: "{{ info }}"
 
 - name: Create a new primary partition on "/dev/sd{{ item }}"
   become: true
