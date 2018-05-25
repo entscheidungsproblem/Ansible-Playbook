@@ -82,8 +82,8 @@
   file: 
     path: " {{ storage }}/docker/"
     state: directory
-    owner: sudo
-    group: sudo
+    owner: root
+    group: root
     mode: 0755
 
 - name: Create docker-compose
