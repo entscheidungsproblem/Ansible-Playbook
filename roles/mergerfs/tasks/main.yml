@@ -39,6 +39,7 @@
     device: "/dev/sd{{ item }}"
     number: 1
     state: present
+    label: gpt
   with_items: "{{ devices }}"
 
 - name: Create a ext4 filesystem on /dev/sd"{{ item }}1"
