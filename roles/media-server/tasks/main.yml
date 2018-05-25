@@ -78,6 +78,7 @@
 
 - name: Create docker directory
   become: true
+  become_method: sudo
   file: 
     path: " {{ storage }}/docker/"
     state: directory
@@ -85,6 +86,7 @@
 
 - name: Create docker-compose
   become: true
+  become_method: sudo
   template:
     src: "docker-compose.yml.j2"
     dest: " {{ storage }}/docker/docker-compose.yml"
