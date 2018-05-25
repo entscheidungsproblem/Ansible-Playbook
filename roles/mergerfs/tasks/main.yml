@@ -17,6 +17,8 @@
   state: present
 
 - name: Read device information (always use unit when probing)
+  become: true
+  become_method: sudo
   parted: device=/dev/sd"{{ item }}" unit=MiB
   register: info
   with_items: "{{ devices }}"
