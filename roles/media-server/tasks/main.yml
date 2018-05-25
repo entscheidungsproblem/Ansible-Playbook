@@ -26,11 +26,6 @@
       - ffmpeg 
   state: present
 
-- name:  Download Sickbeard Mp4 Automator
-  git:
-    repo: https://github.com/mdhiggins/sickbeard_mp4_automator.git
-    dest: ~/Git/sickbeard_mp4_automator
-
 - name:  Download Sickbeard Mp4 Automator dependencies
   become: true
   become_method: sudo
@@ -49,14 +44,14 @@
       - qtfaststart
     state:  present
 
-- name: Uninstall stevedore
+- name: (Sickbeard dependencies) Uninstall stevedore
   become: true
   pip:
     executable: pip2
     name: stevedore
     state: absent
 
-- name: Install stevedore 1.19.1
+- name: (Sickbeard dependencies) Install stevedore 1.19.1
   become: true
   pip:
     executable: pip2
@@ -64,25 +59,32 @@
     version: 1.19.1
     state: present
 
-- name: Install gevent for Deluge daemon
-  become: true
-  pip:
-    executable: pip2
-    name: gevent
-    state: present
+#- name: Install gevent for Deluge daemon
+#  become: true
+#  pip:
+#    executable: pip2
+#    name: gevent
+#    state: present
 
-- name: Create docker directory
-  file: 
-    path: " {{ storage }}/docker/"
-    state: directory
-    mode: 0755
+- name:  Download Sickbeard Mp4 Automator
+  git:
+    repo: https://github.com/mdhiggins/sickbeard_mp4_automator.git
+    dest: ~/Git/sickbeard_mp4_automator
 
 - name: Create autoProcess
   template:
     src: autoProcess.ini.j2
     dest: ~/Git/sickbeard_mp4_automator/autoProcess.ini
 
+- name: Create docker directory
+  become: true
+  file: 
+    path: " {{ storage }}/docker/"
+    state: directory
+    mode: 0755
+
 - name: Create docker-compose
+  become: true
   template:
     src: "docker-compose.yml.j2"
     dest: " {{ storage }}/docker/docker-compose.yml"
