@@ -32,24 +32,24 @@
 #    state: absent
 #  with_items: "{{ info }}"
 
-- name: Create a new primary partition on "/dev/sd{{ item }}"
-  become: true
-  become_method: sudo
-  parted:
-    device: "/dev/sd{{ item }}"
-    number: 1
-    state: present
-    label: gpt
-  with_items: "{{ devices }}"
+#- name: Create a new primary partition on "/dev/sd{{ item }}"
+#  become: true
+#  become_method: sudo
+#  parted:
+#    device: "/dev/sd{{ item }}"
+#    number: 1
+#    state: present
+#    label: gpt
+#  with_items: "{{ devices }}"
 
-- name: Create a ext4 filesystem on /dev/sd"{{ item }}1"
-  become: true
-  become_method: sudo
-  filesystem:
-    fstype: ext4
-    dev: "/dev/sd{{ item }}1"
-    opts: -cc
-  with_items: "{{ devices }}"
+#- name: Create a ext4 filesystem on /dev/sd"{{ item }}1"
+#  become: true
+#  become_method: sudo
+#  filesystem:
+#    fstype: ext4
+#    dev: "/dev/sd{{ item }}1"
+#    opts: -cc
+#  with_items: "{{ devices }}"
 
 
 - name: Add drive mount directories
