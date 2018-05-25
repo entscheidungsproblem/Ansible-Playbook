@@ -39,7 +39,9 @@ defaultEntryPoints = ["https","http"]
   [entryPoints.https]
   address = ":443"
   [entryPoints.https.tls]
-
+  	#[[entryPoints.https.tls.certificates]]
+  	#certFile = "tests/traefik.crt"
+  	#keyFile = "tests/traefik.key"
 [retry]
 
 ################################################################
