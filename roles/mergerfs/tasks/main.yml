@@ -16,7 +16,7 @@
     number: "{{ item.info.num }}"
     state: absent
   with_items:
-   - "{{ info: sdb_info.partitions, dev: devices}}"
+   - "{{ info: 'sdb_info.partitions', dev: 'devices'}}"
 
 
 - name: Create a new primary partition on "/dev/sd{{ item }}"
