@@ -1,4 +1,4 @@
 ---
 
 dependencies:
-- { role: docker, media-server }
+- { role: docker}

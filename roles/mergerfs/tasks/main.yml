@@ -30,8 +30,11 @@
   become: true
   become_method: sudo
   file: 
+    owner: nobody
+    group: nogroup
     path: /mnt/storage 
     state: directory
+    mode: 0755
 
 - name: Add fstab mount disk entries
   become: true
@@ -46,7 +49,7 @@
 
 - name: Add fstab storage entry
   become: true
-  become_method: sudo
+  become_method: sudo'
   mount:
     name: /mnt/storage
     src: "/mnt/data*"
