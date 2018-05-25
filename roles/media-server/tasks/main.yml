@@ -86,3 +86,16 @@
   template:
     src: "docker-compose.yml.j2"
     dest: " {{ storage }}/docker/docker-compose.yml"
+
+- file:
+    path: /opt/traefik
+    state: directory
+
+- file:
+    path: /opt/traefik/acme.json
+    state: touch
+    mode: 0600
+
+- file:
+    path: /opt/traefik/traefik.toml
+    state: touch

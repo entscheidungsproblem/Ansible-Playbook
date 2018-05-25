@@ -21,6 +21,14 @@ services:
       - PGID=${PGID
       - TZ=${TZ}  
     restart:  always
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=sonarr"
+      - "traefik.frontend.rule=Host:sonarr.${DOMAIN_NAME}"
+      - "traefik.port=8989"
+      - "traefik.docker.network=web"
 
   radarr:
     image: linuxserver/radarr
@@ -37,6 +45,14 @@ services:
       - PGID=${PGID
       - TZ=${TZ}  
     restart:  always
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=radarr"
+      - "traefik.frontend.rule=Host:radarr.${DOMAIN_NAME}"
+      - "traefik.port=7878"
+      - "traefik.docker.network=web"
 
   lidarr:
     image: linuxserver/lidarr
@@ -51,6 +67,14 @@ services:
       - PUID=${PUID}
       - PGID=${PGID
     restart:  always
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=lidarr"
+      - "traefik.frontend.rule=Host:lidarr.${DOMAIN_NAME}"
+      - "traefik.port=7878"
+      - "traefik.docker.network=web"
 
   jackett:
     image: linuxserver/jackett
@@ -66,6 +90,14 @@ services:
       - PGID=${PGID
       - TZ=${TZ}  
     restart:  always
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=jackett"
+      - "traefik.frontend.rule=Host:jackett.${DOMAIN_NAME}"
+      - "traefik.port=9117"
+      - "traefik.docker.network=web"
 
   transmission:
     image: linuxserver/transmission
@@ -82,6 +114,14 @@ services:
       - PUID=${PUID}
       - PGID=${PGID
     restart: always
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=transmission"
+      - "traefik.frontend.rule=Host:transmission.${DOMAIN_NAME}"
+      - "traefik.port=9091"
+      - "traefik.docker.network=web"
 
   deluge:
     image: linuxserver/deluge
@@ -95,6 +135,14 @@ services:
       - PGID=${PGID
       - UMASK_SET=<022>
     restart: always
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=deluge"
+      - "traefik.frontend.rule=Host:deluge.${DOMAIN_NAME}"
+      - "traefik.port=9091"
+      - "traefik.docker.network=web"
 
   ombi:
     container_name: ombi
@@ -109,6 +157,14 @@ services:
       - PGID=${PGID
       - TZ=${TZ}   
     restart: always
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=ombi"
+      - "traefik.frontend.rule=Host:ombi.${DOMAIN_NAME}"
+      - "traefik.port=3579"
+      - "traefik.docker.network=web"
 
   heimdall:
     container_name: heimdall
@@ -122,7 +178,15 @@ services:
       - PUID=${PUID}
       - PGID=${PGID
       - TZ=${TZ}   
+    networks:
+      - web
     restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=heimdall"
+      - "traefik.frontend.rule=Host:heimdall.${DOMAIN_NAME}"
+      - "traefik.port=443"
+      - "traefik.docker.network=web"
 
   tautulli:
     container_name: tautulli
@@ -136,7 +200,15 @@ services:
       - PUID=${PUID}
       - PGID=${PGID
       - TZ=${TZ}  
+    networks:
+      - web
     restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=tautulli"
+      - "traefik.frontend.rule=Host:tautulli.${DOMAIN_NAME}"
+      - "traefik.port=8181"
+      - "traefik.docker.network=web"
 
   plex:
     container_name: plex
@@ -150,8 +222,16 @@ services:
     environment:
       - TZ=${TZ}
       - PLEX_CLAIM= "{{ plex_token }}"
-    network_mode: host  
+    #network_mode: host  
+    networks:
+      - web
     restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=plex"
+      - "traefik.docker.network=web"
+      - "traefik.frontend.rule=Host:plex.${DOMAIN_NAME}"
+      - "traefik.port=32400"
 
   watchtower:
     image: v2tec/watchtower
@@ -159,5 +239,28 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --interval 21600
+    networks:
+      - web
     tlsverify: true
     restart: always
+
+# --docker.domain=docker.localhost
+  proxy:
+    image: traefik
+    command: --web --api --docker 
+    # --docker.domain="{{ domain }}" --acme.email="{{ email }}" --logLevel=DEBUG
+    networks:
+      - web
+    ports:
+      - 80:80
+      - 8080:8080
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/traefik/traefik.toml:/traefik.toml
+      - /opt/traefik/acme.json:/acme.json
+    restart: always
+
+networks:
+  web:
+    external: true
