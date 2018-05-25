@@ -87,15 +87,24 @@
     src: "docker-compose.yml.j2"
     dest: " {{ storage }}/docker/docker-compose.yml"
 
-- file:
+- name: Create Traefik directory
+  become: true
+  become_method: sudo
+  file:
     path: /opt/traefik
     state: directory
 
-- file:
+- name: Create Traefik acme.json
+  become: true
+  become_method: sudo
+  file:
     path: /opt/traefik/acme.json
     state: touch
     mode: 0600
 
-- file:
+- name: Create Traefik traefik.toml
+  become: true
+  become_method: sudo
+  file:
     path: /opt/traefik/traefik.toml
     state: touch
