@@ -8,6 +8,19 @@
       - fuse
   state: present
 
+- name: Parted installation
+  become: true
+  become_method: sudo
+  xbps:
+    name:
+      - parted
+  state: present
+
+- name: Read device information (always use unit when probing)
+  parted: device=/dev/sd"{{ item }}" unit=MiB
+  register: info
+  with_items: "{{ devices }}"
+
 - name: Remove all partitions from /dev/sd"{{ item.dev }}"
   become: true
   become_method: sudo
