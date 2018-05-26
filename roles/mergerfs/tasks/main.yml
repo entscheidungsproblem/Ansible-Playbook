@@ -76,7 +76,7 @@
   mount:
     name: "/mnt/data{{ item }}"
     src: "/dev/sd{{ item }}"
-    opts: defaults,allow_other,use_ino,errors=remount-ro
+    opts: defaults,use_ino,errors=remount-ro
     fstype: ext4
     state: mounted
   with_items: "{{ devices }}"
