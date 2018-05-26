@@ -75,7 +75,7 @@
   become_method: sudo
   mount:
     name: "/mnt/data{{ item }}"
-    src: "/dev/sd{{ item }}"
+    src: "/dev/sd{{ item }}1"
     opts: defaults,use_ino,errors=remount-ro
     fstype: ext4
     state: mounted
