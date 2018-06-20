@@ -1,0 +1,20 @@
+---
+
+- name: Install "{{ item.name }}" plus addon
+  firefox_addon:
+    url: "{{ item.url }}"
+    state: present
+  for_items:
+    - {name: 'uBlock Origin', url: 'https://addons.mozilla.org/en-US/firefox/addon/adblock-plus'}
+    - {name: 'Privacy Badger', url: 'https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17'}
+    - {name: 'Tree Style Tab', url: 'https://addons.mozilla.org/en-US/firefox/addon/tree-style-tab/'}
+    - {name: 'Octotree', url: 'https://addons.mozilla.org/en-US/firefox/addon/octotree/'}
+    - {name: 'Stylish', url: 'https://addons.mozilla.org/en-US/firefox/addon/stylish/'}
+    - {name: 'Imagus', url: 'https://addons.mozilla.org/en-US/firefox/addon/imagus/'}
+    - {name: 'Decentraleyes', url: 'https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/'}
+    - {name: 'NoScript', url: 'https://addons.mozilla.org/en-US/firefox/addon/noscript/'}
+
+- name: Install Shadowfox updater
+  get_url:
+    url: "{{ shadowfox.url }}"
+    dest: 

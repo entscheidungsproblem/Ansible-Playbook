@@ -1,0 +1,5 @@
+---
+
+shadowfox:
+  version: 1.5.0
+  url: https://github.com/SrKomodo/shadowfox-updater/releases/download/v"{{ shadowfox.version }}"/shadowfox_linux_amd64

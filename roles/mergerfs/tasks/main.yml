@@ -68,7 +68,7 @@
     group: nogroup
     path: /mnt/storage 
     state: directory
-    mode: 0777
+    mode: 0755
 
 - name: Add fstab mount disk entries
   become: true
